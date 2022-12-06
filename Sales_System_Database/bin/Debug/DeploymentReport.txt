@@ -1,0 +1,21 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [dbo].[CartTable] (Table)
+       [dbo].[CustomerTable] (Table)
+       [dbo].[ProductTable] (Table)
+       [dbo].[PurchaseTable] (Table)
+       Foreign Key: unnamed constraint on [dbo].[CartTable] (Foreign Key)
+       Foreign Key: unnamed constraint on [dbo].[PurchaseTable] (Foreign Key)
+       Foreign Key: unnamed constraint on [dbo].[PurchaseTable] (Foreign Key)
+
+** Supporting actions

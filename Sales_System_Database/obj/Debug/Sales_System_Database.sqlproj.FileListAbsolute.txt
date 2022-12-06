@@ -1,0 +1,10 @@
+C:\Users\suhai\source\repos\ICM_Training\Sales_System_Database\bin\Debug\Sales_System_Database.dacpac
+C:\Users\suhai\source\repos\ICM_Training\Sales_System_Database\bin\Debug\Sales_System_Database.dll
+C:\Users\suhai\source\repos\ICM_Training\Sales_System_Database\bin\Debug\Sales_System_Database.pdb
+C:\Users\suhai\source\repos\ICM_Training\Sales_System_Database\obj\Debug\Sales_System_Database.sqlproj.AssemblyReference.cache
+C:\Users\suhai\source\repos\ICM_Training\Sales_System_Database\obj\Debug\Sales_System_Database.dll
+C:\Users\suhai\source\repos\ICM_Training\Sales_System_Database\obj\Debug\Sales_System_Database.pdb
+C:\Users\suhai\source\repos\ICM_Training\Sales_System_Database\obj\Debug\Model.xml
+C:\Users\suhai\source\repos\ICM_Training\Sales_System_Database\obj\Debug\refactor.xml
+C:\Users\suhai\source\repos\ICM_Training\Sales_System_Database\obj\Debug\postdeploy.sql
+C:\Users\suhai\source\repos\ICM_Training\Sales_System_Database\obj\Debug\predeploy.sql

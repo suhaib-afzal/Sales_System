@@ -1,0 +1,12 @@
+C:\Users\suhai\source\repos\ICM_Training\Sales_System_Class_Library\bin\Debug\net6.0-windows\Class_Library.deps.json
+C:\Users\suhai\source\repos\ICM_Training\Sales_System_Class_Library\bin\Debug\net6.0-windows\Class_Library.dll
+C:\Users\suhai\source\repos\ICM_Training\Sales_System_Class_Library\bin\Debug\net6.0-windows\Class_Library.pdb
+C:\Users\suhai\source\repos\ICM_Training\Sales_System_Class_Library\obj\Debug\net6.0-windows\Class_Library.csproj.AssemblyReference.cache
+C:\Users\suhai\source\repos\ICM_Training\Sales_System_Class_Library\obj\Debug\net6.0-windows\Class_Library.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\suhai\source\repos\ICM_Training\Sales_System_Class_Library\obj\Debug\net6.0-windows\Class_Library.AssemblyInfoInputs.cache
+C:\Users\suhai\source\repos\ICM_Training\Sales_System_Class_Library\obj\Debug\net6.0-windows\Class_Library.AssemblyInfo.cs
+C:\Users\suhai\source\repos\ICM_Training\Sales_System_Class_Library\obj\Debug\net6.0-windows\Class_Library.csproj.CoreCompileInputs.cache
+C:\Users\suhai\source\repos\ICM_Training\Sales_System_Class_Library\obj\Debug\net6.0-windows\Class_Library.dll
+C:\Users\suhai\source\repos\ICM_Training\Sales_System_Class_Library\obj\Debug\net6.0-windows\refint\Class_Library.dll
+C:\Users\suhai\source\repos\ICM_Training\Sales_System_Class_Library\obj\Debug\net6.0-windows\Class_Library.pdb
+C:\Users\suhai\source\repos\ICM_Training\Sales_System_Class_Library\obj\Debug\net6.0-windows\ref\Class_Library.dll
