@@ -31,9 +31,12 @@ namespace Class_Library.DataAccess
             }
         }
 
-        public static List<PurchaseModel> GetPurchaseTable()
+        public static List<DisplayPurchaseModel> GetPurchaseTable()
         {
-            throw new NotImplementedException();
+            using (IDbConnection connection = new SqlConnection(Helper.CnnVal("Sales_System_Database")))
+            {
+                return connection.Query<DisplayPurchaseModel>("EXEC dbo.PurchaseTable_GetPurchaseTable").ToList();
+            }
         }
 
     }

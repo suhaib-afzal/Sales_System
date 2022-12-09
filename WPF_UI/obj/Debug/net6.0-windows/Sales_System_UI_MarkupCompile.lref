@@ -1,9 +1,9 @@
 ﻿
 FC:\Users\suhai\source\repos\ICM_Training\WPF_UI\App.xaml;;
-FC:\Users\suhai\source\repos\ICM_Training\WPF_UI\Views\CartDatabaseView.xaml;;
-FC:\Users\suhai\source\repos\ICM_Training\WPF_UI\Views\CustomerDatabaseView.xaml;;
 FC:\Users\suhai\source\repos\ICM_Training\WPF_UI\Views\DatabaseView.xaml;;
-FC:\Users\suhai\source\repos\ICM_Training\WPF_UI\Views\ProductDatabaseView.xaml;;
-FC:\Users\suhai\source\repos\ICM_Training\WPF_UI\Views\PurchaseDatabaseView.xaml;;
 FC:\Users\suhai\source\repos\ICM_Training\WPF_UI\Views\SalesView.xaml;;
+FC:\Users\suhai\source\repos\ICM_Training\WPF_UI\Views\Tables\CartDatabaseView.xaml;;
+FC:\Users\suhai\source\repos\ICM_Training\WPF_UI\Views\Tables\CustomerDatabaseView.xaml;;
+FC:\Users\suhai\source\repos\ICM_Training\WPF_UI\Views\Tables\ProductDatabaseView.xaml;;
+FC:\Users\suhai\source\repos\ICM_Training\WPF_UI\Views\Tables\PurchaseDatabaseView.xaml;;
 

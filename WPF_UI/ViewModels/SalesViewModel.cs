@@ -52,10 +52,12 @@ namespace Sales_System_UI.ViewModels
         //This property allows us to initialise the Cart with the
         //currently active Discounts we have. Discounts need to
         //implement IDiscountModel.
-        public CartModel FinalCart { get; private set; } 
-            = new CartModel( new List<IDiscountModel> { //Input Active Discounts Here.
-                                                        //new Mock2for1onHairbrushes() 
-                                                      } );
+        public static CartModel InitialFinalCart { get; }
+            = new CartModel(new List<IDiscountModel> { //Input Active Discounts Here.
+                                                       //new Mock2for1onHairbrushes() 
+                                                     });
+
+        public CartModel FinalCart { get; private set; } = InitialFinalCart;
 
         public string? FinalTotal { get; private set; }
 
@@ -214,7 +216,7 @@ namespace Sales_System_UI.ViewModels
                 }
                 
                 //Sets DateTime and Purchases but not Customer.
-                //Customer ID only needed for Pay so set there.
+                //Customer ID only needed for Payment so set when paying.
                 FinalCart.Purchases = PurchasesListBox.ToList();
                 FinalCart.DateTime = DateTime.Now;
 
@@ -240,7 +242,7 @@ namespace Sales_System_UI.ViewModels
             {
                 //Allows for user to un-finalise their cart if they need to make
                 //changes.
-                FinalCart = new CartModel();
+                FinalCart = InitialFinalCart;
                 FinalTotal = String.Format("{0:C}", 0m);
                 NotifyOfPropertyChange(() => FinalTotal);
                 AppliedDiscountsListBox.Clear();
@@ -286,7 +288,7 @@ namespace Sales_System_UI.ViewModels
                 int IDofInserted = CartData.InsertNewCart(FinalCart);
                 CustomerData.UpdateCustomerSpending(SelectedCustomerListBox, SelectedCustomerListBox.TotalPurchases + FinalTotalNum);
                 PurchaseData.InsertNewPurchases(IDofInserted, PurchasesListBox.ToList());
-                //Action<PurchaseModel> removeQuantityFromStock = (Action<PurchaseModel>)Delegate.CreateDelegate()
+
                 foreach (PurchaseModel purchase in PurchasesListBox)
                 {
                     purchase.Product.Stock -= (int)purchase.Quantity;

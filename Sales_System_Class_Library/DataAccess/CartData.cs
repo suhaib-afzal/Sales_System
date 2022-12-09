@@ -39,11 +39,11 @@ namespace Class_Library.DataAccess
             }
         }
 
-        public static List<CartModel> GetCartTable()
+        public static List<DisplayCartModel> GetCartTable()
         {
             using (IDbConnection connection = new SqlConnection(Helper.CnnVal("Sales_System_Database")))
             {
-                return connection.Query<CartModel>("dbo.CartTable_GetCartTable").ToList();
+                return connection.Query<DisplayCartModel>("EXEC dbo.CartTable_GetCartTable").ToList();
             }
         }
     }

@@ -7,19 +7,19 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Views\CartDatabaseView.xaml.cs">
+    <Compile Update="Views\Tables\CartDatabaseView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\CustomerDatabaseView.xaml.cs">
+    <Compile Update="Views\Tables\CustomerDatabaseView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\DatabaseView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\ProductDatabaseView.xaml.cs">
+    <Compile Update="Views\Tables\ProductDatabaseView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\PurchaseDatabaseView.xaml.cs">
+    <Compile Update="Views\Tables\PurchaseDatabaseView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\SalesView.xaml.cs">
@@ -27,19 +27,19 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Views\CartDatabaseView.xaml">
+    <Page Update="Views\Tables\CartDatabaseView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\CustomerDatabaseView.xaml">
+    <Page Update="Views\Tables\CustomerDatabaseView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\DatabaseView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\ProductDatabaseView.xaml">
+    <Page Update="Views\Tables\ProductDatabaseView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\PurchaseDatabaseView.xaml">
+    <Page Update="Views\Tables\PurchaseDatabaseView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\SalesView.xaml">

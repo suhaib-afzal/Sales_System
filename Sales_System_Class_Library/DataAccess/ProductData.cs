@@ -42,7 +42,9 @@ namespace Class_Library.DataAccess
         {
             using (IDbConnection connection = new SqlConnection(Helper.CnnVal("Sales_System_Database")))
             {
-                return connection.Query<ProductModel>("dbo.ProductTable_GetProducts").ToList();
+                var output = connection.Query<ProductModel>("EXEC dbo.ProductTable_GetProducts").ToList();
+
+                return output;
             }
         }
 
