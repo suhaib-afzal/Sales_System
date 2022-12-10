@@ -14,6 +14,6 @@ namespace Class_Library.DataModels
 
         public decimal ProfitMade { get; set; }
 
-        public DateTime DateTime { get; set; }
+        public DateTime TimeofPurchase { get; set; }
     }
 }

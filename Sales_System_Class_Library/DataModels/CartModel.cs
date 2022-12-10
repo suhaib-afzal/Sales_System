@@ -25,7 +25,7 @@ namespace Class_Library.DataModels
         /// <summary>
         /// Date and Time of purchased Cart.
         /// </summary>
-        public DateTime? DateTime { get; set; }
+        public DateTime? TimeofPurchase { get; set; }
 
         /// <summary>
         /// Customer involved in the Purchase.

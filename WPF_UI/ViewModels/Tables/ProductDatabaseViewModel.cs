@@ -23,7 +23,10 @@ namespace Sales_System_UI.ViewModels.Tables
 
         public List<ProductModel> AddedRows { get; set; } = new List<ProductModel>();
 
-        public ProductModel? SelectedProductDataGrid {
+        public ValidIDManager validIDManager { get; set; }
+
+        public ProductModel? SelectedProductDataGrid 
+        {
             get
             {
                 return _selectedProductDataGrid;
@@ -36,77 +39,29 @@ namespace Sales_System_UI.ViewModels.Tables
             }
         }
 
-        private string? _updateName;
-        private string? _updateDescription;
-        private string? _updateStock;
-        private string? _updateSalePrice;
-        private string? _updateCostPrice;
-
-        public string? UpdateName 
-        { 
-            get { return _updateName; }
-            set { _updateName = value; }
-        } 
-
-        public string? UpdateDescription 
+        public ProductDatabaseViewModel(ValidIDManager ValidIDManager)
         {
-            get { return _updateDescription; }
-            set { _updateDescription = value; }
+            validIDManager = ValidIDManager;
         }
 
-        public string? UpdateStock 
-        { 
-            get { return _updateStock; }
-            set { _updateStock = value; } 
-        }
+        public string? UpdateName { get; set; }
+        public string? UpdateDescription { get; set; }
 
-        public string? UpdateSalePrice 
-        {
-            get { return _updateSalePrice; }
-            set { _updateSalePrice = value; }
-        }
+        public string? UpdateStock { get; set; }
 
-        public string? UpdateCostPrice 
-        {
-            get { return _updateCostPrice; }
-            set { _updateCostPrice = value; }
-        }
+        public string? UpdateSalePrice { get; set; }
 
-        private string? _addName;
-        private string? _addDescription;
-        private string? _addStock;
-        private string? _addSalePrice;
-        private string? _addCostPrice;
+        public string? UpdateCostPrice { get; set; }
 
-        public string? AddName
-        {
-            get { return _addName; }
-            set { _addName = value; }
-        }
+        public string? AddName { get; set; }
 
-        public string? AddDescription
-        {
-            get { return _addDescription; }
-            set { _addDescription = value; }
-        }
+        public string? AddDescription { get; set; }
 
-        public string? AddStock
-        {
-            get { return _addStock; }
-            set { _addStock = value; }
-        }
+        public string? AddStock { get; set; }
 
-        public string? AddSalePrice
-        {
-            get { return _addSalePrice; }
-            set { _addSalePrice = value; }
-        }
+        public string? AddSalePrice { get; set; }
 
-        public string? AddCostPrice
-        {
-            get { return _addCostPrice; }
-            set { _addCostPrice = value; }
-        }
+        public string? AddCostPrice { get; set; }
 
         public bool isSaved { get; private set; } = true;
 
@@ -153,7 +108,29 @@ namespace Sales_System_UI.ViewModels.Tables
 
         public void Save()
         {
-            throw new NotImplementedException();
+            if (UpdatedRows.Count > 0)
+            {
+                ProductData.UpdateProductTable(UpdatedRows);
+                UpdatedRows.Clear();
+            }
+
+            if (AddedRows.Count > 0)
+            {
+                ProductData.InsertNewProducts(AddedRows);
+                AddedRows.Clear();
+            }
+            
+            if (AddedRows.Count > 0 || UpdatedRows.Count > 0)
+            {
+                SelectedProductDataGrid = null;
+                ResetUpdateInputs();
+
+                ResetAddInputs();
+
+                OriginalProductDataGrid = ProductData.GetProductTable();
+                NotifyOfPropertyChange(() => ProductDataGrid);
+            }
+            
         }
 
         public void UpdateRow()
@@ -211,7 +188,7 @@ namespace Sales_System_UI.ViewModels.Tables
             ProductDataGrid[SelectedIndex] = UpdatedProduct;
             NotifyOfPropertyChange(() => ProductDataGrid);
 
-            UpdatedRows.Add(UpdatedProduct);
+            UpdatedRows = AddToUpdatedRows(UpdatedRows, UpdatedProduct);
 
             SelectedProductDataGrid = null;
             NotifyOfPropertyChange(() => SelectedProductDataGrid);
@@ -237,7 +214,7 @@ namespace Sales_System_UI.ViewModels.Tables
 
             ProductModel AddedProduct = new ProductModel
             {
-                Product_ID = 0,
+                Product_ID = validIDManager.GenerateValidProductID(),
                 Name = AddName,
                 Description = AddDescription,
                 Stock = AddStockInt,
@@ -250,6 +227,21 @@ namespace Sales_System_UI.ViewModels.Tables
 
             AddedRows.Add(AddedProduct);
             ResetAddInputs();
+        }
+
+        public List<ProductModel> AddToUpdatedRows(List<ProductModel> ListUpdatedProducts, ProductModel ToUpdateProd)
+        {
+            int IndexOfLastTimeUpdatedThisProduct = ListUpdatedProducts.FindLastIndex(p => p.Product_ID == ToUpdateProd.Product_ID);
+            if (IndexOfLastTimeUpdatedThisProduct == -1)
+            {
+                ListUpdatedProducts.Add(ToUpdateProd);
+                return ListUpdatedProducts;
+            }
+            else
+            {
+                ListUpdatedProducts[IndexOfLastTimeUpdatedThisProduct] = ToUpdateProd;
+                return ListUpdatedProducts;
+            }
         }
 
         public bool ValidateName(string? Name)

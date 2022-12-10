@@ -76,5 +76,6 @@
     <Build Include="StoredProcedures\dbo.CustomerTable_GetCustomerTable.sql" />
     <Build Include="StoredProcedures\dbo.CartTable_GetCartTable.sql" />
     <Build Include="StoredProcedures\dbo.PurchaseTable_GetPurchaseTable.sql" />
+    <Build Include="StoredProcedures\dbo.CartTable_InsertCartWithID.sql" />
   </ItemGroup>
 </Project>

@@ -17,6 +17,13 @@ namespace Sales_System_UI.ViewModels.Tables
 
         public List<DisplayPurchaseModel> AddedRows { get; set; } = new List<DisplayPurchaseModel>();
 
+        public ValidIDManager validIDManager { get; set; }
+
+        public PurchaseDatabaseViewModel(ValidIDManager ValidIDManager)
+        {
+            validIDManager = ValidIDManager;
+        }
+
         public bool isSaved { get; private set; } = true;
 
         public void Save()

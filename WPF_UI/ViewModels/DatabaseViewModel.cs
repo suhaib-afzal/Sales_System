@@ -17,10 +17,11 @@ namespace Sales_System_UI.ViewModels
     {
         public DatabaseViewModel()
         {
-            Items.Add(new ProductDatabaseViewModel());
-            Items.Add(new CustomerDatabaseViewModel());
-            Items.Add(new PurchaseDatabaseViewModel());
-            Items.Add(new CartDatabaseViewModel());
+            ValidIDManager connectingIDManager = new ValidIDManager();
+            Items.Add(new ProductDatabaseViewModel(connectingIDManager));
+            Items.Add(new CustomerDatabaseViewModel(connectingIDManager));
+            Items.Add(new PurchaseDatabaseViewModel(connectingIDManager));
+            Items.Add(new CartDatabaseViewModel(connectingIDManager));
             LoadProducts();
         }
 

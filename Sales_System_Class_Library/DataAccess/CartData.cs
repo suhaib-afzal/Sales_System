@@ -28,7 +28,7 @@ namespace Class_Library.DataAccess
             {
 
                 List<int> IDofInserted = connection.Query<int>("EXEC dbo.CartTable_insertNewCart @Customer_ID, @ProfitMade, @DateTime", 
-                    new { Customer_ID = newCart.Customer.Customer_ID, ProfitMade = newCart.ProfitMade, DateTime = newCart.DateTime }).ToList();
+                    new { Customer_ID = newCart.Customer.Customer_ID, ProfitMade = newCart.ProfitMade, DateTime = newCart.TimeofPurchase }).ToList();
 
                 if (IDofInserted.Count > 1)
                 {
@@ -36,6 +36,14 @@ namespace Class_Library.DataAccess
                 }
 
                 return IDofInserted[0];
+            }
+        }
+
+        public static void InsertNewCartsWithID(List<DisplayCartModel> displayCarts)
+        {
+            using (IDbConnection connection = new SqlConnection(Helper.CnnVal("Sales_System_Database")))
+            {
+                connection.Query("");
             }
         }
 

@@ -3,12 +3,87 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:local="clr-namespace:Sales_System_UI.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="450" d:DesignWidth="900"
              Background ="white">
-    
-    <DataGrid x:Name="CustomerDataGrid">
 
-    </DataGrid>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height ="auto"/>
+            <RowDefinition Height ="auto"/>
+            <RowDefinition Height ="auto"/>
+            <RowDefinition Height ="auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Row 1 -->
+        <DataGrid x:Name="CustomerDataGrid"
+                  Grid.Row="1" Grid.Column="1"
+                  Grid.ColumnSpan="7"
+                  Height="400" Width="900">
+
+        </DataGrid>
+
+        <!-- Row 2 -->
+        <TextBlock Text="Update:"
+                   Grid.Row="2" Grid.Column="1"/>
+
+        <toolkit:WatermarkTextBox x:Name="UpdateFirstName"
+                                  Grid.Row="2" Grid.Column="2"
+                                  Margin="0,0,0,0" Width="150"
+                                  Watermark="First Name"/>
+
+        <toolkit:WatermarkTextBox x:Name="UpdateLastName"
+                                  Grid.Row="2" Grid.Column="3"
+                                  Margin="0,0,0,0" Width="150"
+                                  Watermark="Last Name"/>
+
+
+        <toolkit:WatermarkTextBox x:Name="UpdateTotalPurchases"
+                                  Grid.Row="2" Grid.Column="4"
+                                  Margin="0,0,0,0" Width="150"
+                                  Watermark="Total Spent"/>
+
+        <Button x:Name="UpdateRow"
+                Grid.Row="2" Grid.Column="5"
+                Content="Update"/>
+
+        <!-- Row 2 -->
+        <TextBlock Text="Add New:"
+                   Grid.Row="3" Grid.Column="1"/>
+
+        <toolkit:WatermarkTextBox x:Name="AddFirstName"
+                                  Grid.Row="3" Grid.Column="2"
+                                  Margin="0,0,0,0" Width="150"
+                                  Watermark="First Name"/>
+
+
+
+        <toolkit:WatermarkTextBox x:Name="AddLastName"
+                                  Grid.Row="3" Grid.Column="3"
+                                  Margin="0,0,0,0" Width="150"
+                                  Watermark="Last Name"/>
+
+
+        <toolkit:WatermarkTextBox x:Name="AddTotalPurchases"
+                                  Grid.Row="3" Grid.Column="4"
+                                  Margin="0,0,0,0" Width="150"
+                                  Watermark="Total Spent"/>
+
+        <Button x:Name="AddNew"
+                Grid.Row="3" Grid.Column="5"
+                Content="Add"/>
+
+
+    </Grid>
 </UserControl>
