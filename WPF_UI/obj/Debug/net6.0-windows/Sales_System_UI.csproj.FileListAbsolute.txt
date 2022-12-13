@@ -62,3 +62,5 @@ C:\Users\suhai\source\repos\ICM_Training\WPF_UI\obj\Debug\net6.0-windows\Views\T
 C:\Users\suhai\source\repos\ICM_Training\WPF_UI\obj\Debug\net6.0-windows\Views\Tables\CustomerDatabaseView.baml
 C:\Users\suhai\source\repos\ICM_Training\WPF_UI\obj\Debug\net6.0-windows\Views\Tables\ProductDatabaseView.baml
 C:\Users\suhai\source\repos\ICM_Training\WPF_UI\obj\Debug\net6.0-windows\Views\Tables\PurchaseDatabaseView.baml
+C:\Users\suhai\source\repos\ICM_Training\WPF_UI\obj\Debug\net6.0-windows\Views\MainView.g.cs
+C:\Users\suhai\source\repos\ICM_Training\WPF_UI\obj\Debug\net6.0-windows\Views\MainView.baml

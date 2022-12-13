@@ -12,6 +12,8 @@ namespace Sales_System_UI.ViewModels.Tables
     {
         public void Save();
 
+        public void ResetAll();
+
         bool isSaved { get; }
     }
 }

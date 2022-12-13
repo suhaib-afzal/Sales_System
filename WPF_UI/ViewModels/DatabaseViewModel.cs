@@ -15,15 +15,18 @@ namespace Sales_System_UI.ViewModels
 {
     public class DatabaseViewModel : Conductor<ITableViewModel>.Collection.OneActive
     {
+        public event EventHandler? DatabaseUpdatedEvent;
+
         public DatabaseViewModel()
         {
             ValidIDManager connectingIDManager = new ValidIDManager();
             Items.Add(new ProductDatabaseViewModel(connectingIDManager));
             Items.Add(new CustomerDatabaseViewModel(connectingIDManager));
-            Items.Add(new PurchaseDatabaseViewModel(connectingIDManager));
             Items.Add(new CartDatabaseViewModel(connectingIDManager));
+            Items.Add(new PurchaseDatabaseViewModel(connectingIDManager));
             LoadProducts();
         }
+
 
         public void LoadProducts()
         {
@@ -35,12 +38,12 @@ namespace Sales_System_UI.ViewModels
             ActivateItemAsync(Items[1]);
         }
 
-        public void LoadPurchases()
+        public void LoadCarts()
         {
             ActivateItemAsync(Items[2]);
         }
 
-        public void LoadCarts()
+        public void LoadPurchases()
         {
             ActivateItemAsync(Items[3]);
         }
@@ -48,9 +51,16 @@ namespace Sales_System_UI.ViewModels
         public void SaveAll()
         {
             Items.Apply(p => p.Save());
+            DatabaseUpdatedEvent?.Invoke(this, EventArgs.Empty);
         }
 
-        public void OnClose()
+        public void ResetAll()
+        {
+            Items.Apply(p => p.ResetAll());
+        }
+
+
+        /*public void OnClose()
         {
             bool CanClose = Items.ToList().TrueForAll(p => p.isSaved == true);
 
@@ -75,6 +85,6 @@ namespace Sales_System_UI.ViewModels
             {
                 //close
             }
-        }
+        }*/
     }
 }

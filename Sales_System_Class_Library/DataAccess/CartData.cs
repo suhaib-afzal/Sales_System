@@ -12,9 +12,15 @@ namespace Class_Library.DataAccess
 {
     public static class CartData
     {
-        public static void UpdateCartTable(List<CartModel> updatedCarts)
+        public static void UpdateCartTable(List<DisplayCartModel> updatedCarts)
         {
-            throw new NotImplementedException();
+            using (IDbConnection connection = new SqlConnection(Helper.CnnVal("Sales_System_Database")))
+            {
+                foreach (DisplayCartModel displayCartModel in updatedCarts)
+                {
+                    connection.Execute("dbo.CartTable_UpdateRow @Cart_ID, @Customer_ID, @ProfitMade, @TimeofPurchase", displayCartModel);
+                }
+            }
         }
 
         public static int InsertNewCart(CartModel newCart)
@@ -43,7 +49,10 @@ namespace Class_Library.DataAccess
         {
             using (IDbConnection connection = new SqlConnection(Helper.CnnVal("Sales_System_Database")))
             {
-                connection.Query("");
+                foreach (DisplayCartModel displayCart in displayCarts)
+                {
+                    connection.Execute("dbo.CartTable_InsertCartWithID @Cart_ID, @Customer_ID, @ProfitMade, @TimeofPurchase",displayCart);
+                }
             }
         }
 

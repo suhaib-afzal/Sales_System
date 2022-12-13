@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\suhai\source\repos\ICM_Training\WPF_UI\App.xaml
-6-2101595411
+7-844749675
 
-17-127331871
+191064169298
 2061485148927
-Views\DatabaseView.xaml;Views\SalesView.xaml;Views\Tables\CartDatabaseView.xaml;Views\Tables\CustomerDatabaseView.xaml;Views\Tables\ProductDatabaseView.xaml;Views\Tables\PurchaseDatabaseView.xaml;
+Views\DatabaseView.xaml;Views\MainView.xaml;Views\SalesView.xaml;Views\Tables\CartDatabaseView.xaml;Views\Tables\CustomerDatabaseView.xaml;Views\Tables\ProductDatabaseView.xaml;Views\Tables\PurchaseDatabaseView.xaml;
 
-True
+False
 

@@ -59,23 +59,34 @@
     <Folder Include="DataInput" />
     <Folder Include="StoredProcedures" />
     <Folder Include="TableDefinitions" />
+    <Folder Include="StoredProcedures\CartTable" />
+    <Folder Include="StoredProcedures\CustomerTable" />
+    <Folder Include="StoredProcedures\ProductTable" />
+    <Folder Include="StoredProcedures\PurchaseTable" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="DataInput\CustomerDataIn.sql" />
     <Build Include="DataInput\ProductDataIn.sql" />
-    <Build Include="StoredProcedures\dbo.ProductTable_UpdateProductStock.sql" />
-    <Build Include="StoredProcedures\dbo.CartTable_insertNewCart.sql" />
-    <Build Include="StoredProcedures\dbo.CustomerTable_Update.sql" />
-    <Build Include="StoredProcedures\dbo.ProductTable_GetInStockProducts.sql" />
-    <Build Include="StoredProcedures\dbo.ProductTable_GetProducts.sql" />
-    <Build Include="StoredProcedures\dbo.PurchaseTable_InsertNewPurchase.sql" />
     <Build Include="TableDefinitions\PurchaseTable.sql" />
     <Build Include="TableDefinitions\ProductTable.sql" />
     <Build Include="TableDefinitions\CustomerTable.sql" />
     <Build Include="TableDefinitions\CartTable.sql" />
-    <Build Include="StoredProcedures\dbo.CustomerTable_GetCustomerTable.sql" />
-    <Build Include="StoredProcedures\dbo.CartTable_GetCartTable.sql" />
-    <Build Include="StoredProcedures\dbo.PurchaseTable_GetPurchaseTable.sql" />
-    <Build Include="StoredProcedures\dbo.CartTable_InsertCartWithID.sql" />
+    <Build Include="StoredProcedures\CartTable\dbo.CartTable_GetCartTable.sql" />
+    <Build Include="StoredProcedures\CartTable\dbo.CartTable_InsertCartWithID.sql" />
+    <Build Include="StoredProcedures\CartTable\dbo.CartTable_insertNewCart.sql" />
+    <Build Include="StoredProcedures\CartTable\dbo.CartTable_UpdateRow.sql" />
+    <Build Include="StoredProcedures\CustomerTable\dbo.CustomerTable_GetCustomerTable.sql" />
+    <Build Include="StoredProcedures\CustomerTable\dbo.CustomerTable_UpdateRow.sql" />
+    <Build Include="StoredProcedures\ProductTable\dbo.ProductTable_GetInStockProducts.sql" />
+    <Build Include="StoredProcedures\ProductTable\dbo.ProductTable_GetProducts.sql" />
+    <Build Include="StoredProcedures\ProductTable\dbo.ProductTable_UpdateProductStock.sql" />
+    <Build Include="StoredProcedures\ProductTable\dbo.ProductTable_UpdateRow.sql" />
+    <Build Include="StoredProcedures\PurchaseTable\dbo.PurchaseTable_GetPurchaseTable.sql" />
+    <Build Include="StoredProcedures\PurchaseTable\dbo.PurchaseTable_InsertNewPurchase.sql" />
+    <Build Include="StoredProcedures\PurchaseTable\dbo.PurchaseTable_UpdateRow.sql" />
+    <Build Include="StoredProcedures\CustomerTable\dbo.CustomerTable_InsertCustomerWithID.sql" />
+    <Build Include="StoredProcedures\CustomerTable\dbo.CustomerTable_UpdateTotalSpending.sql" />
+    <Build Include="StoredProcedures\ProductTable\dbo.ProductTable_InsertProductWithID.sql" />
+    <Build Include="StoredProcedures\PurchaseTable\dbo.PurchaseTable_InsertPurchaseWithID.sql" />
   </ItemGroup>
 </Project>

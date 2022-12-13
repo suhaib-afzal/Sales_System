@@ -30,6 +30,10 @@ namespace Sales_System_UI.ViewModels
 
         public PurchaseModel? SelectedPurchasesListBox { get; set; }
 
+
+        public event EventHandler? SalesUpdatedEvent; 
+
+
         // A read-only property, that will independently
         // calculate and return as a formatted string the current
         // subtotal in the Cart. That is, the total without discounts.
@@ -218,7 +222,7 @@ namespace Sales_System_UI.ViewModels
                 //Sets DateTime and Purchases but not Customer.
                 //Customer ID only needed for Payment so set when paying.
                 FinalCart.Purchases = PurchasesListBox.ToList();
-                FinalCart.DateTime = DateTime.Now;
+                FinalCart.TimeofPurchase = DateTime.Now;
 
                 //Finds and displays Discounts.
                 List<IDiscountModel> ApplicableDiscounts = FinalCart.FindApplicableDiscounts();
@@ -296,12 +300,18 @@ namespace Sales_System_UI.ViewModels
 
                 List<ProductModel> ProductsWithUpdatedStock = PurchasesListBox.ToList().ConvertAll(p => p.Product);
                 ProductData.UpdateProductsStock(ProductsWithUpdatedStock);
+
+                //Raises the event in order to communicate to the database
+                //view model
+                SalesUpdatedEvent?.Invoke(this, EventArgs.Empty);
+
                 ClearEverything();
             }
         }
 
-        private void ClearEverything()
+        public void ClearEverything()
         {
+            //this.Refresh();
             CustomerListBox = CustomerData.GetCustomerTable(); //MockDataAccess.GetCustomerModels();
             NotifyOfPropertyChange(() => CustomerListBox);
 

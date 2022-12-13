@@ -116,7 +116,8 @@ namespace Sales_System_UI.ViewModels.Tables
 
             if (AddedRows.Count > 0)
             {
-                ProductData.InsertNewProducts(AddedRows);
+                ProductData.InsertNewProductsWithID(AddedRows);
+                validIDManager.ResetProductIDs();
                 AddedRows.Clear();
             }
             
@@ -128,9 +129,25 @@ namespace Sales_System_UI.ViewModels.Tables
                 ResetAddInputs();
 
                 OriginalProductDataGrid = ProductData.GetProductTable();
+                ProductDataGrid = new BindableCollection<ProductModel>(OriginalProductDataGrid);
                 NotifyOfPropertyChange(() => ProductDataGrid);
             }
             
+        }
+        public void ResetAll()
+        {
+            UpdatedRows.Clear();
+            validIDManager.ResetProductIDs();
+            AddedRows.Clear();
+
+            SelectedProductDataGrid = null;
+            ResetUpdateInputs();
+
+            ResetAddInputs();
+
+            OriginalProductDataGrid = ProductData.GetProductTable();
+            ProductDataGrid = new BindableCollection<ProductModel>(OriginalProductDataGrid);
+            NotifyOfPropertyChange(() => ProductDataGrid);
         }
 
         public void UpdateRow()

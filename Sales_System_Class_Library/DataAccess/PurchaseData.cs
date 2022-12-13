@@ -12,9 +12,16 @@ namespace Class_Library.DataAccess
 {
     public static class PurchaseData
     {
-        public static void UpdatePurchaseTable(List<PurchaseModel> changedPurchases)
+        
+        public static void UpdatePurchaseTable(List<DisplayPurchaseModel> changedPurchases)
         {
-            throw new NotImplementedException();
+            using (IDbConnection connection = new SqlConnection(Helper.CnnVal("Sales_System_Database")))
+            {
+                foreach(DisplayPurchaseModel purchase in changedPurchases)
+                {
+                    connection.Execute("dbo.PurchaseTable_UpdateRow @Purchase_ID, @Cart_ID, @Product_ID, @Quantity", purchase);
+                }
+            }
         }
 
         public static void InsertNewPurchases(int Cart_ID, List<PurchaseModel> newPurchases)
@@ -27,6 +34,17 @@ namespace Class_Library.DataAccess
                         new { Cart_ID = Cart_ID,
                               Product_ID = newPurchases[i].Product.Product_ID,
                               Quantity = (int)newPurchases[i].Quantity });
+                }
+            }
+        }
+
+        public static void InsertNewPurchasesWithID(List<DisplayPurchaseModel> insertPurchases)
+        {
+            using (IDbConnection connection = new SqlConnection(Helper.CnnVal("Sales_System_Database")))
+            {
+                foreach(DisplayPurchaseModel purchase in insertPurchases)
+                {
+                    connection.Execute("PurchaseTable_InsertPurchaseWithID @Purchase_ID, @Cart_ID, @Product_ID, @Quantity", purchase);
                 }
             }
         }

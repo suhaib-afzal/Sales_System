@@ -16,8 +16,6 @@ namespace Sales_System_UI.ViewModels.Tables
 
         public static List<DisplayCartModel> OriginalCartDataGrid { get; set; } = CartData.GetCartTable();
 
-        //public static List<int> ExistingCustomer_IDs { get; set; } = CustomerData.GetCustomerTable().ConvertAll(p => p.Customer_ID);
-
         public BindableCollection<DisplayCartModel> CartDataGrid { get; set; } = new BindableCollection<DisplayCartModel>(OriginalCartDataGrid);
 
         public List<DisplayCartModel> UpdatedRows { get; set; } = new List<DisplayCartModel>();
@@ -45,7 +43,7 @@ namespace Sales_System_UI.ViewModels.Tables
             validIDManager = ValidIDManager;
         }
 
-        public string? UpdateCustomer_ID { get; set; }
+        public string? UpdateCustomerID { get; set; }
 
         public string? UpdateProfitMade { get; set; }
 
@@ -53,7 +51,7 @@ namespace Sales_System_UI.ViewModels.Tables
 
 
 
-        public string? AddCustomer_ID { get; set; }
+        public string? AddCustomerID { get; set; }
 
         public string? AddProfitMade { get; set; }
 
@@ -65,20 +63,20 @@ namespace Sales_System_UI.ViewModels.Tables
         {
             if (SelectedCartDataGrid == null)
             {
-                UpdateCustomer_ID = null;
+                UpdateCustomerID = null;
                 UpdateProfitMade = null;
                 UpdateTimeOfPurchase = null;
 
             }
             else
             {
-                UpdateCustomer_ID = $"{ SelectedCartDataGrid.Customer_ID }";
+                UpdateCustomerID = $"{ SelectedCartDataGrid.Customer_ID }";
                 UpdateProfitMade = $"{ SelectedCartDataGrid.ProfitMade }";
                 UpdateTimeOfPurchase = $"{ SelectedCartDataGrid.TimeofPurchase }";
 
             }
 
-            NotifyOfPropertyChange(() => UpdateCustomer_ID);
+            NotifyOfPropertyChange(() => UpdateCustomerID);
             NotifyOfPropertyChange(() => UpdateProfitMade);
             NotifyOfPropertyChange(() => UpdateTimeOfPurchase);
 
@@ -86,12 +84,12 @@ namespace Sales_System_UI.ViewModels.Tables
 
         public void ResetAddInputs()
         {
-            AddCustomer_ID = null;
+            AddCustomerID = null;
             AddProfitMade = null;
             AddTimeOfPurchase = null;
 
 
-            NotifyOfPropertyChange(() => AddCustomer_ID);
+            NotifyOfPropertyChange(() => AddCustomerID);
             NotifyOfPropertyChange(() => AddProfitMade);
             NotifyOfPropertyChange(() => AddTimeOfPurchase);
 
@@ -107,7 +105,8 @@ namespace Sales_System_UI.ViewModels.Tables
 
             if (AddedRows.Count > 0)
             {
-                CartData.InsertNewCarts(AddedRows);
+                CartData.InsertNewCartsWithID(AddedRows);
+                validIDManager.ResetCartIDs();
                 AddedRows.Clear();
             }
 
@@ -119,8 +118,25 @@ namespace Sales_System_UI.ViewModels.Tables
                 ResetAddInputs();
 
                 OriginalCartDataGrid = CartData.GetCartTable();
+                CartDataGrid = new BindableCollection<DisplayCartModel>(OriginalCartDataGrid);
                 NotifyOfPropertyChange(() => CartDataGrid);
             }
+        }
+
+        public void ResetAll()
+        {
+            UpdatedRows.Clear();
+            AddedRows.Clear();
+            validIDManager.ResetCartIDs();
+
+            SelectedCartDataGrid = null;
+            ResetUpdateInputs();
+
+            ResetAddInputs();
+
+            OriginalCartDataGrid = CartData.GetCartTable();
+            CartDataGrid = new BindableCollection<DisplayCartModel>(OriginalCartDataGrid);
+            NotifyOfPropertyChange(() => CartDataGrid);
         }
 
         public void UpdateRow()
@@ -135,7 +151,7 @@ namespace Sales_System_UI.ViewModels.Tables
             }
 
 
-            int UpdateCustomer_IDInt = ValidateCustomer_ID(UpdateCustomer_ID);
+            int UpdateCustomer_IDInt = ValidateCustomer_ID(UpdateCustomerID);
             decimal UpdateProfitMadeDecimal = ValidatePrices(UpdateProfitMade, "ProfitMade");
             DateTime PurchaseDateTime = ValidateDateTime(UpdateTimeOfPurchase);
 
@@ -180,7 +196,7 @@ namespace Sales_System_UI.ViewModels.Tables
 
         public void AddNew()
         {
-            int AddCustomer_IDInt = ValidateCustomer_ID(AddCustomer_ID);
+            int AddCustomer_IDInt = ValidateCustomer_ID(AddCustomerID);
             decimal AddProfitMadeDecimal = ValidatePrices(AddProfitMade, "ProfitMade");
             DateTime AddPurchaseDateTime = ValidateDateTime(AddTimeOfPurchase);
 
@@ -225,7 +241,7 @@ namespace Sales_System_UI.ViewModels.Tables
         {
             if (Customer_IDString == null || Customer_IDString == "")
             {
-                MessageBox.Show($"Please make sure Customer_ID is not empty before attemting to Update",
+                MessageBox.Show($"Please make sure Customer_ID is not empty before attemting",
                                  "Validation Error",
                                  MessageBoxButton.OK,
                                  MessageBoxImage.Error);

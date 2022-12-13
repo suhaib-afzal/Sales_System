@@ -39,15 +39,17 @@
                     Height="20" Width="80"
                     Content="Customer"/>
 
-            <Button x:Name ="LoadPurchases"
+            <Button x:Name ="LoadCarts"
                     Grid.Row="1" Grid.Column="3"
+                    Height="20" Width="80"
+                    Content="Cart"/>
+
+            <Button x:Name ="LoadPurchases"
+                    Grid.Row="1" Grid.Column="4"
                     Height="20" Width="80"
                     Content="Purchase"/>
 
-            <Button x:Name ="LoadCarts"
-                    Grid.Row="1" Grid.Column="4"
-                    Height="20" Width="80"
-                    Content="Cart"/>
+            
         
             <!-- Row 2 -->
             <ContentControl x:Name="ActiveItem"

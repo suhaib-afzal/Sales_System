@@ -106,7 +106,8 @@ namespace Sales_System_UI.ViewModels.Tables
 
             if (AddedRows.Count > 0)
             {
-                CustomerData.InsertNewCustomer(AddedRows);
+                CustomerData.InsertNewCustomersWithID(AddedRows);
+                validIDManager.ResetCustomerIDs();
                 AddedRows.Clear();
             }
 
@@ -118,8 +119,25 @@ namespace Sales_System_UI.ViewModels.Tables
                 ResetAddInputs();
 
                 OriginalCustomerDataGrid = CustomerData.GetCustomerTable();
+                CustomerDataGrid = new BindableCollection<CustomerModel>(OriginalCustomerDataGrid);
                 NotifyOfPropertyChange(() => CustomerDataGrid);
             }
+        }
+
+        public void ResetAll()
+        {
+            UpdatedRows.Clear();
+            AddedRows.Clear();
+            validIDManager.ResetCustomerIDs();
+
+            SelectedCustomerDataGrid = null;
+            ResetUpdateInputs();
+
+            ResetAddInputs();
+
+            OriginalCustomerDataGrid = CustomerData.GetCustomerTable();
+            CustomerDataGrid = new BindableCollection<CustomerModel>(OriginalCustomerDataGrid);
+            NotifyOfPropertyChange(() => CustomerDataGrid);
         }
 
         public void UpdateRow()

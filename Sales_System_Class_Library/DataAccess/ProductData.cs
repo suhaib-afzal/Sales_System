@@ -14,7 +14,14 @@ namespace Class_Library.DataAccess
     {
         public static void UpdateProductTable(List<ProductModel> updatedProducts)
         {
-            throw new NotImplementedException();
+            using (IDbConnection connection = new SqlConnection(Helper.CnnVal("Sales_System_Database")))
+            {
+                foreach(ProductModel product in updatedProducts)
+                {
+                    connection.Execute("dbo.ProductTable_UpdateRow @Product_ID, @Name, @Description, @Stock, @SalePrice, @CostPrice",
+                        product);
+                }
+            }
         }
 
         public static void UpdateProductsStock(List<ProductModel> updatedProducts)
@@ -36,6 +43,18 @@ namespace Class_Library.DataAccess
         public static void InsertNewProducts(List<ProductModel> newProducts)
         {
             throw new NotImplementedException();
+        }
+
+        public static void InsertNewProductsWithID(List<ProductModel> newProducts)
+        {
+            using (IDbConnection connection = new SqlConnection(Helper.CnnVal("Sales_System_Database")))
+            {
+                foreach (ProductModel product in newProducts)
+                {
+                    connection.Execute("dbo.ProductTable_InsertProductWithID @Product_ID, @Name, @Description, @Stock, @SalePrice, @CostPrice",
+                        product);
+                }
+            }
         }
 
         public static List<ProductModel> GetProductTable()

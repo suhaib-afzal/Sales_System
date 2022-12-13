@@ -31,7 +31,8 @@
         <DataGrid x:Name="ProductDataGrid"
                   Grid.Row="1" Grid.Column="1"
                   Grid.ColumnSpan="7"
-                  Height="400" Width="900">
+                  Height="400" Width="900"
+                  IsReadOnly="True">
 
         </DataGrid>
 
