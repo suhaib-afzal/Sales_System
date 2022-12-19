@@ -11,6 +11,9 @@ using System.Xml.Linq;
 
 namespace Sales_System_UI.ViewModels.Tables
 {
+    //This is the ProductDatabase this will display a readonly DataGrid with "Add boxes" and "Update Boxes"
+    //These boxes will be editble by the user and they can enter their values into them to add and update rows
+    //When the user clicks on a row (selects it) the update bpoxes will immieditly get the existing values to be changed.
     public class ProductDatabaseViewModel : Screen, ITableViewModel
     {
         private ProductModel? _selectedProductDataGrid;
@@ -25,6 +28,7 @@ namespace Sales_System_UI.ViewModels.Tables
 
         public ValidIDManager validIDManager { get; set; }
 
+        //When user selects a different row will update the Update row boxes
         public ProductModel? SelectedProductDataGrid 
         {
             get
@@ -44,6 +48,7 @@ namespace Sales_System_UI.ViewModels.Tables
             validIDManager = ValidIDManager;
         }
 
+        //Update boxes
         public string? UpdateName { get; set; }
         public string? UpdateDescription { get; set; }
 
@@ -53,6 +58,8 @@ namespace Sales_System_UI.ViewModels.Tables
 
         public string? UpdateCostPrice { get; set; }
 
+
+        //Add boxes
         public string? AddName { get; set; }
 
         public string? AddDescription { get; set; }
@@ -62,6 +69,8 @@ namespace Sales_System_UI.ViewModels.Tables
         public string? AddSalePrice { get; set; }
 
         public string? AddCostPrice { get; set; }
+
+
 
         public bool isSaved { get; private set; } = true;
 
@@ -106,6 +115,9 @@ namespace Sales_System_UI.ViewModels.Tables
             NotifyOfPropertyChange(() => AddCostPrice);
         }
 
+        //The save method is divided into sections because we do not want to send an
+        //empty list to the Data Access classes to update the Database
+        //We could tackle this differently by changing the methods themselves
         public void Save()
         {
             if (UpdatedRows.Count > 0)
@@ -200,18 +212,23 @@ namespace Sales_System_UI.ViewModels.Tables
                 CostPrice = UpdateCostPriceDecimal
             };
 
+            //Changes the Datagrid visible to user
             int SelectedIndex = ProductDataGrid.ToList().FindIndex(p => p == SelectedProductDataGrid);
 
             ProductDataGrid[SelectedIndex] = UpdatedProduct;
             NotifyOfPropertyChange(() => ProductDataGrid);
 
+            //Adds to updated rows
             UpdatedRows = AddToUpdatedRows(UpdatedRows, UpdatedProduct);
 
+            //Resets
             SelectedProductDataGrid = null;
             NotifyOfPropertyChange(() => SelectedProductDataGrid);
             ResetUpdateInputs();
         }
 
+        //Bound the Add button. Will validate the inputted values.
+        //Will add the row to the visible DataGrid
         public void AddNew()
         {
             bool successfulName = ValidateName(AddName);
@@ -239,13 +256,16 @@ namespace Sales_System_UI.ViewModels.Tables
                 CostPrice = AddCostPriceDecimal
             };
 
+            //Adds to the visible DataGrid
             ProductDataGrid.Add(AddedProduct);
             NotifyOfPropertyChange(() => ProductDataGrid);
 
+            //Adds to Added rows
             AddedRows.Add(AddedProduct);
             ResetAddInputs();
         }
 
+        //Ensures the Updated row is not a duplicate in the UpdatedRows List.
         public List<ProductModel> AddToUpdatedRows(List<ProductModel> ListUpdatedProducts, ProductModel ToUpdateProd)
         {
             int IndexOfLastTimeUpdatedThisProduct = ListUpdatedProducts.FindLastIndex(p => p.Product_ID == ToUpdateProd.Product_ID);

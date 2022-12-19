@@ -59,6 +59,7 @@ namespace Sales_System_UI.ViewModels
         public static CartModel InitialFinalCart { get; }
             = new CartModel(new List<IDiscountModel> { //Input Active Discounts Here.
                                                        //new Mock2for1onHairbrushes() 
+                                                       new TwentyFivePercentOffEverything()
                                                      });
 
         public CartModel FinalCart { get; private set; } = InitialFinalCart;

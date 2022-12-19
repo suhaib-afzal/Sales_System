@@ -10,6 +10,9 @@ using System.Windows;
 
 namespace Sales_System_UI.ViewModels.Tables
 {
+    //This is the PurchaseDatabase this will display a readonly DataGrid with "Add boxes" and "Update Boxes"
+    //These boxes will be editble by the user and they can enter their values into them to add and update rows
+    //When the user clicks on a row (selects it) the update bpoxes will immieditly get the existing values to be changed.
     public class PurchaseDatabaseViewModel : Screen, ITableViewModel
     {
         private DisplayPurchaseModel? _selectedPurchaseDataGrid;
@@ -24,6 +27,7 @@ namespace Sales_System_UI.ViewModels.Tables
 
         public ValidIDManager validIDManager { get; set; }
 
+        //When user selects a different row will update the Update row boxes
         public DisplayPurchaseModel? SelectedPurchaseDataGrid
         {
             get
@@ -95,6 +99,9 @@ namespace Sales_System_UI.ViewModels.Tables
 
         }
 
+        //The save method is divided into sections because we do not want to send an
+        //empty list to the Data Access classes to update the Database
+        //We could tackle this differently by changing the methods themselves
         public void Save()
         {
             if (UpdatedRows.Count > 0)
@@ -182,18 +189,22 @@ namespace Sales_System_UI.ViewModels.Tables
                 Quantity = QuantityInt
             };
 
+            //Changes the Datagrid visible to user
             int SelectedIndex = PurchaseDataGrid.ToList().FindIndex(p => p == SelectedPurchaseDataGrid);
 
             PurchaseDataGrid[SelectedIndex] = UpdatedProduct;
             NotifyOfPropertyChange(() => PurchaseDataGrid);
 
+            //Adds to updated rows
             UpdatedRows = AddToUpdatedRows(UpdatedRows, UpdatedProduct);
 
+            //Resets
             SelectedPurchaseDataGrid = null;
             NotifyOfPropertyChange(() => SelectedPurchaseDataGrid);
             ResetUpdateInputs();
         }
-
+        //Bound the Add button. Will validate the inputted values.
+        //Will add the row to the visible DataGrid
         public void AddNew()
         {
             int AddCart_IDInt = ValidateCart_ID(AddCartID);
@@ -215,13 +226,16 @@ namespace Sales_System_UI.ViewModels.Tables
                 Quantity = AddQuantityInt
             };
 
+            //Adds to the visible DataGrid
             PurchaseDataGrid.Add(AddedProduct);
             NotifyOfPropertyChange(() => PurchaseDataGrid);
 
+            //Adds to Added rows
             AddedRows.Add(AddedProduct);
             ResetAddInputs();
         }
 
+        //Ensures the Updated row is not a duplicate in the UpdatedRows List.
         public List<DisplayPurchaseModel> AddToUpdatedRows(List<DisplayPurchaseModel> ListUpdatedProducts, DisplayPurchaseModel ToUpdateProd)
         {
             int IndexOfLastTimeUpdatedThisProduct = ListUpdatedProducts.FindLastIndex(p => p.Cart_ID == ToUpdateProd.Cart_ID);
@@ -236,7 +250,7 @@ namespace Sales_System_UI.ViewModels.Tables
                 return ListUpdatedProducts;
             }
         }
-
+        
         public int ValidateCart_ID(string? Cart_IDString)
         {
             if (Cart_IDString == null || Cart_IDString == "")

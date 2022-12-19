@@ -10,6 +10,9 @@ using System.Windows;
 
 namespace Sales_System_UI.ViewModels.Tables
 {
+    //This is the CartDatabase this will display a readonly DataGrid with "Add boxes" and "Update Boxes"
+    //These boxes will be editble by the user and they can enter their values into them to add and update rows
+    //When the user clicks on a row (selects it) the update bpoxes will immieditly get the existing values to be changed.
     public class CartDatabaseViewModel : Screen, ITableViewModel
     {
         private DisplayCartModel? _selectedCartDataGrid;
@@ -24,6 +27,7 @@ namespace Sales_System_UI.ViewModels.Tables
 
         public ValidIDManager validIDManager { get; set; }
 
+        //When user selects a different row will update the Update row boxes
         public DisplayCartModel? SelectedCartDataGrid
         {
             get
@@ -43,6 +47,7 @@ namespace Sales_System_UI.ViewModels.Tables
             validIDManager = ValidIDManager;
         }
 
+        //Update boxes
         public string? UpdateCustomerID { get; set; }
 
         public string? UpdateProfitMade { get; set; }
@@ -50,7 +55,7 @@ namespace Sales_System_UI.ViewModels.Tables
         public string? UpdateTimeOfPurchase { get; set; }
 
 
-
+        //Add boxes
         public string? AddCustomerID { get; set; }
 
         public string? AddProfitMade { get; set; }
@@ -95,8 +100,12 @@ namespace Sales_System_UI.ViewModels.Tables
 
         }
 
+        //The save method is divided into sections because we do not want to send an
+        //empty list to the Data Access classes to update the Database
+        //We could tackle this differently by changing the methods themselves
         public void Save()
         {
+            
             if (UpdatedRows.Count > 0)
             {
                 CartData.UpdateCartTable(UpdatedRows);
@@ -139,6 +148,9 @@ namespace Sales_System_UI.ViewModels.Tables
             NotifyOfPropertyChange(() => CartDataGrid);
         }
 
+        //Bound to the update button. Will validate selections and make sure that the new
+        //values are actually different.
+        //Will also change the DataGrid visible to the user.
         public void UpdateRow()
         {
             if (SelectedCartDataGrid == null)
@@ -182,18 +194,23 @@ namespace Sales_System_UI.ViewModels.Tables
                 TimeofPurchase = PurchaseDateTime
             };
 
+            //Changes the Datagrid visible to user
             int SelectedIndex = CartDataGrid.ToList().FindIndex(p => p == SelectedCartDataGrid);
 
             CartDataGrid[SelectedIndex] = UpdatedProduct;
             NotifyOfPropertyChange(() => CartDataGrid);
 
+            //Adds to updated rows
             UpdatedRows = AddToUpdatedRows(UpdatedRows, UpdatedProduct);
 
+            //Resets
             SelectedCartDataGrid = null;
             NotifyOfPropertyChange(() => SelectedCartDataGrid);
             ResetUpdateInputs();
         }
 
+        //Bound the Add button. Will validate the inputted values.
+        //Will add the row to the visible DataGrid
         public void AddNew()
         {
             int AddCustomer_IDInt = ValidateCustomer_ID(AddCustomerID);
@@ -215,13 +232,18 @@ namespace Sales_System_UI.ViewModels.Tables
                 TimeofPurchase = AddPurchaseDateTime
             };
 
+            //Adds to the visible DataGrid
             CartDataGrid.Add(AddedProduct);
             NotifyOfPropertyChange(() => CartDataGrid);
 
+            //Adds to Added rows
             AddedRows.Add(AddedProduct);
+
+            //Resets
             ResetAddInputs();
         }
 
+        //Ensures the Updated row is not a duplicate in the UpdatedRows List.
         public List<DisplayCartModel> AddToUpdatedRows(List<DisplayCartModel> ListUpdatedProducts, DisplayCartModel ToUpdateProd)
         {
             int IndexOfLastTimeUpdatedThisProduct = ListUpdatedProducts.FindLastIndex(p => p.Customer_ID == ToUpdateProd.Customer_ID);
@@ -237,6 +259,7 @@ namespace Sales_System_UI.ViewModels.Tables
             }
         }
 
+        //Ensures non-null, non-empty, parseable and Valid (via validIDManager) Customer_ID.
         public int ValidateCustomer_ID(string? Customer_IDString)
         {
             if (Customer_IDString == null || Customer_IDString == "")
@@ -269,6 +292,7 @@ namespace Sales_System_UI.ViewModels.Tables
             return Customer_IDInt;
         }
 
+        //Ensures non-null, non-empty, not equal to DateTime.MinValue, parseable, DateTime.
         public DateTime ValidateDateTime(string? TimeofPurchaseString)
         {
             if (TimeofPurchaseString == null || TimeofPurchaseString == "")
@@ -303,7 +327,7 @@ namespace Sales_System_UI.ViewModels.Tables
             return PurchaseDateTime;
         }
 
-
+        //Ensures non-null, non-empty, parsable and not maximum or negative, Money values.
         public decimal ValidatePrices(string? PriceString, string VarName)
         {
             if (PriceString == null || PriceString == "")

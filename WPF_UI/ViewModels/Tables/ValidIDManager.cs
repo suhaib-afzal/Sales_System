@@ -7,8 +7,16 @@ using System.Threading.Tasks;
 
 namespace Sales_System_UI.ViewModels.Tables
 {
+    /// <summary>
+    /// Will generate new IDs when the user adds a row to each Table
+    /// These IDs will be greater than the greatest current existing
+    /// Allowing these rows to be inserted directly into their respective tables.
+    /// Can also allow us to ensure foreign keys reference existing IDs when selected by the user
+    /// including rows added by the user.
+    /// </summary>
     public class ValidIDManager
     {
+        //Gets the Initial List of IDs that already exist in each Table
         public List<int> ValidProductIDs = ProductData.GetProductTable().ConvertAll(p => p.Product_ID);
 
         public List<int> ValidCustomerIDs = CustomerData.GetCustomerTable().ConvertAll(p => p.Customer_ID);
@@ -45,6 +53,7 @@ namespace Sales_System_UI.ViewModels.Tables
             return MaxValidPurchaseID + 1;
         }
 
+        //Reset incase the ID changes somehow.
         public void ResetProductIDs()
         {
             ValidProductIDs = ProductData.GetProductTable().ConvertAll(p => p.Product_ID);

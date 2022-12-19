@@ -10,6 +10,9 @@ using System.Windows;
 
 namespace Sales_System_UI.ViewModels.Tables
 {
+    //This is the CustomerDatabase this will display a readonly DataGrid with "Add boxes" and "Update Boxes"
+    //These boxes will be editble by the user and they can enter their values into them to add and update rows
+    //When the user clicks on a row (selects it) the update bpoxes will immieditly get the existing values to be changed.
     public class CustomerDatabaseViewModel : Screen, ITableViewModel
     {
         private CustomerModel? _selectedCustomerDataGrid;
@@ -24,6 +27,7 @@ namespace Sales_System_UI.ViewModels.Tables
 
         public ValidIDManager validIDManager { get; set; }
 
+        //When user selects a different row will update the Update row boxes
         public CustomerModel? SelectedCustomerDataGrid
         {
             get
@@ -43,6 +47,7 @@ namespace Sales_System_UI.ViewModels.Tables
             validIDManager = ValidIDManager;
         }
 
+        //Update boxes
         public string? UpdateFirstName { get; set; }
 
         public string? UpdateLastName { get; set; }
@@ -50,7 +55,7 @@ namespace Sales_System_UI.ViewModels.Tables
         public string? UpdateTotalPurchases { get; set; }
 
 
-
+        //Add boxes
         public string? AddFirstName { get; set; }
 
         public string? AddLastName { get; set; }
@@ -96,6 +101,9 @@ namespace Sales_System_UI.ViewModels.Tables
 
         }
 
+        //The save method is divided into sections because we do not want to send an
+        //empty list to the Data Access classes to update the Database
+        //We could tackle this differently by changing the methods themselves
         public void Save()
         {
             if (UpdatedRows.Count > 0)
@@ -140,6 +148,9 @@ namespace Sales_System_UI.ViewModels.Tables
             NotifyOfPropertyChange(() => CustomerDataGrid);
         }
 
+        //Bound to the update button. Will validate selections and make sure that the new
+        //values are actually different.
+        //Will also change the DataGrid visible to the user.
         public void UpdateRow()
         {
             if (SelectedCustomerDataGrid == null)
@@ -183,18 +194,23 @@ namespace Sales_System_UI.ViewModels.Tables
                 TotalPurchases = UpdateTotalPurchaseDecimal
             };
 
+            //Changes the Datagrid visible to user
             int SelectedIndex = CustomerDataGrid.ToList().FindIndex(p => p == SelectedCustomerDataGrid);
 
             CustomerDataGrid[SelectedIndex] = UpdatedProduct;
             NotifyOfPropertyChange(() => CustomerDataGrid);
 
+            //Adds to updated rows
             UpdatedRows = AddToUpdatedRows(UpdatedRows, UpdatedProduct);
 
+            //Resets
             SelectedCustomerDataGrid = null;
             NotifyOfPropertyChange(() => SelectedCustomerDataGrid);
             ResetUpdateInputs();
         }
 
+        //Bound the Add button. Will validate the inputted values.
+        //Will add the row to the visible DataGrid
         public void AddNew()
         {
             bool successfulFirstName = ValidateName(AddFirstName, "First Name");
@@ -216,13 +232,16 @@ namespace Sales_System_UI.ViewModels.Tables
                 TotalPurchases = AddTotalPuchaseDecimal
             };
 
+            //Adds to the visible DataGrid
             CustomerDataGrid.Add(AddedProduct);
             NotifyOfPropertyChange(() => CustomerDataGrid);
 
+            //Adds to Added rows
             AddedRows.Add(AddedProduct);
             ResetAddInputs();
         }
 
+        //Ensures the Updated row is not a duplicate in the UpdatedRows List.
         public List<CustomerModel> AddToUpdatedRows(List<CustomerModel> ListUpdatedProducts, CustomerModel ToUpdateProd)
         {
             int IndexOfLastTimeUpdatedThisProduct = ListUpdatedProducts.FindLastIndex(p => p.Customer_ID == ToUpdateProd.Customer_ID);

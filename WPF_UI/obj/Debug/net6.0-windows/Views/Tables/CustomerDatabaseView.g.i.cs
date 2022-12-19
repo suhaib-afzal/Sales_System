@@ -142,7 +142,7 @@ namespace Sales_System_UI.Views.Tables {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Sales_System_UI;V1.0.0.0;component/views/tables/customerdatabaseview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Sales_System_UI;component/views/tables/customerdatabaseview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\Views\Tables\CustomerDatabaseView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
